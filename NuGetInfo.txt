@@ -58,3 +58,34 @@ dotnet restore `
     --configfile $configFile `
     --no-cache `
     --verbosity normal
+    
+    
+    
+The package might belong to another repository
+The application repository is:
+
+Wlf.Mp.Api
+
+The package is:
+
+Wlf.Identity.IntegrationEvents
+
+That package may be:
+	• Linked to a different Identity repository 
+	• Configured with its own user/team access list 
+	• Linked to a repository but not inheriting its permissions 
+	• Inheriting from a repository you cannot access 
+
+NuGet packages can either inherit permission from a linked repository or use independently configured permissions. 
+
+The package administrator needs to inspect:
+	LA-WLF
+→ Packages
+→ Wlf.Identity.IntegrationEvents
+→ Package settings
+→ Manage access or Inherited access
+
+They should determine:
+	1. Which repository, if any, is linked to the package. 
+	2. Whether Inherit access from repository is enabled. 
+Whether your GitHub username or team has Read access.
