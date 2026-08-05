@@ -95,3 +95,82 @@ Get-ChildItem -Recurse -File -Include `
     *.csproj,Directory.Packages.props,Directory.Build.props,*.props,*.targets |
     Select-String -Pattern `
         "Wlf.Identity.IntegrationEvents|Serilog.AspNetCore"
+        
+/////////////////////////////////////////////
+//
+//
+The API cannot completely restore because it eventually reaches:
+
+Wlf.Identity.IntegrationEvents
+
+and GitHub Packages rejects that private-package request with 403 Forbidden. Public dependencies may still download successfully, but one unavailable dependency causes the project or solution restore to be considered failed.
+
+
+/////////////////////////////////////////////////////////////
+
+For Wlf.Identity.IntegrationEvents, I need two things:
+
+1. The Git repository containing the source code
+2. The compiled NuGet package published to GitHub Packages
+
+Those are separately stored and separately authorized.
+
+
+Git source repository
+github.com/LA-WLF/<identity-repository>
+	git clone succeeds
+
+NuGet package
+nuget.pkg.github.com/LA-WLF/
+Wlf.Identity.IntegrationEvents
+	dotnet restore receives 403
+	
+When GitHub returns 403 Forbidden for Wlf.Identity.IntegrationEvents
+	that means the request to download the published NuGet package, not the request to clone its source-code repository.
+
+
+//What one owner should do
+
+They should sign into GitHub and navigate to:
+
+LA-WLF organization
+→ Packages
+→ Wlf.Identity.IntegrationEvents
+→ Package settings
+
+On the package settings page, they should find either Manage access or Inherited access. GitHub uses different wording depending on whether package permissions are independent or inherited from a repository.
+
+If it says “Manage access”
+
+The package has its own permission list.
+
+If it says “Inherited access”
+
+The package inherits permission from a linked repository.
+
+The owner should identify which repository is linked to the package. If the package is supposed to inherit from the repository containing the Wlf.Identity.IntegrationEvents source code, they should verify:
+
+Inherit access from repository: enabled
+Linked repository: the correct Identity repository
+Your account/team: Read access to that repository
+
+GitHub says a user with Read access to a linked repository should receive Read access to the package when inheritance is enabled.
+
+
+///////////////////////////////////////////////
+//
+//  this is probably what happened to Wlf.Identity.IntegrationEvents 
+
+The package is linked to a different repository.
+The package was linked after it was published and inheritance was never enabled.
+The organization disabled automatic inheritance.
+The package uses independent permissions despite appearing related to the repository.
+
+
+	
+// Message to send to Owners of the LA-WLF GitHub organization
+Please open LA-WLF -> Packages -> Wlf.Identity.IntegrationEvents -> Package settings. 
+
+Under Manage access or Inherited access, verify that my GitHub username (labswal) or the UI Team has Read permission.
+
+If the package inherits permissions, please verify that it is linked to the correct Identity repository and that Inherit access from repository is enabled. This is package access for local NuGet restore, not Manage Actions access.
