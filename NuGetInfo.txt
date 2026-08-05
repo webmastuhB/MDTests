@@ -89,3 +89,9 @@ They should determine:
 	1. Which repository, if any, is linked to the package. 
 	2. Whether Inherit access from repository is enabled. 
 Whether your GitHub username or team has Read access.
+
+
+Get-ChildItem -Recurse -File -Include `
+    *.csproj,Directory.Packages.props,Directory.Build.props,*.props,*.targets |
+    Select-String -Pattern `
+        "Wlf.Identity.IntegrationEvents|Serilog.AspNetCore"
