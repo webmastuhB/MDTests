@@ -218,3 +218,53 @@ Invoke-WebRequest `
         Authorization = "Basic $authorization"
         Accept        = "application/json"
     }
+    
+These tests above PROVE that permissions are ok.
+
+The exact endpoint for Wlf.Identity.IntegrationEvents returned HTTP 200 and listed versions 1.0.4 and 1.0.0. Together with the successful Wlf.Mp.Common.Application test, this proves:
+
+Your classic PAT works.
+SSO authorization works.
+Your account can read both packages.
+The corporate proxy is passing the authenticated requests.
+No organization owner needs to change package permissions
+
+//////////////////////////////////////////////////
+
+$githubUsername = "labswal"
+$pat = $credential.GetNetworkCredential().Password
+
+
+
+$credentialValue =
+    "Username=$githubUsername;" +
+    "Password=$pat;" +
+    "ValidAuthenticationTypes=Basic"
+
+[Environment]::SetEnvironmentVariable(
+    "NuGetPackageSourceCredentials_LA-WLF",
+    $credentialValue,
+    "Process"
+)
+
+
+
+[Environment]::GetEnvironmentVariable(
+    "NuGetPackageSourceCredentials_LA-WLF",
+    "Process"
+) -ne $null
+
+
+
+$configFile = Join-Path $env:APPDATA "NuGet\NuGet.Config"
+
+dotnet nuget disable source "github" `
+    --configfile $configFile
+    
+    
+cd "C:\path\to\Wlf.Mp.IdentityServer"
+
+dotnet restore `
+    --configfile $configFile `
+    --no-cache `
+    --verbosity normal
