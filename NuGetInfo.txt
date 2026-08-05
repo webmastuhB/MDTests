@@ -268,3 +268,13 @@ dotnet restore `
     --configfile $configFile `
     --no-cache `
     --verbosity normal
+    
+    
+// rewrite the stored credential properly instead of manually editing XML
+
+dotnet nuget update source "LA-WLF" `
+    --source "https://nuget.pkg.github.com/LA-WLF/index.json" `
+    --username $githubUsername `
+    --password $pat `
+    --valid-authentication-types basic `
+    --configfile $configFile
