@@ -1,0 +1,47 @@
+<Project>
+  <!--
+    Repository-wide build enforcement.
+
+    C#:
+      - nullable reference types enabled
+      - code style enforced during build
+      - compiler/analyzer warnings fail the build
+      - latest recommended analyzer set enabled
+
+    SQL database projects:
+      - SQL code analysis enabled
+      - identifier reference casing validated
+      - selected built-in rules that directly match the T-SQL standards are errors
+  -->
+
+  <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.csproj'">
+    <Nullable>enable</Nullable>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.sqlproj'">
+    <RunSqlCodeAnalysis>true</RunSqlCodeAnalysis>
+    <ValidateCasingOnIdentifiers>true</ValidateCasingOnIdentifiers>
+
+    <!--
+      Elevate the Microsoft SQL code-analysis rules that directly correspond to
+      the written standards:
+
+        SR0001  Avoid SELECT *
+        SR0005  Avoid leading-wildcard LIKE predicates on indexed/large data paths
+        SR0006  Keep column references sargable in comparisons
+        SR0010  Avoid deprecated join syntax
+        SR0011  Avoid special characters in object names
+        SR0012  Avoid reserved words for type names
+        SR0015  Extract deterministic function calls from WHERE predicates
+        SR0016  Do not use sp_ for user stored procedures
+
+      Other SQL analysis findings remain warnings so they can be evaluated in
+      context instead of silently imposing rules that are not in the standards.
+    -->
+    <SqlCodeAnalysisRules>+!Microsoft.Rules.Data.SR0001;+!Microsoft.Rules.Data.SR0005;+!Microsoft.Rules.Data.SR0006;+!Microsoft.Rules.Data.SR0010;+!Microsoft.Rules.Data.SR0011;+!Microsoft.Rules.Data.SR0012;+!Microsoft.Rules.Data.SR0015;+!Microsoft.Rules.Data.SR0016</SqlCodeAnalysisRules>
+  </PropertyGroup>
+</Project>

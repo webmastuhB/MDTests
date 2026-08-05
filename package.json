@@ -1,0 +1,33 @@
+{
+  "name": "coding-standards-enforcement",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:css && npm run format:check",
+    "lint:js": "eslint . --max-warnings 0",
+    "lint:js:fix": "eslint . --fix",
+    "lint:css": "stylelint \"**/*.css\"",
+    "lint:css:strict": "stylelint \"**/*.css\" --max-warnings 0",
+    "lint:css:fix": "stylelint \"**/*.css\" --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "check": "npm run lint:js && npm run lint:css:strict && npm run format:check"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 100
+  },
+  "devDependencies": {
+    "@eslint/js": "~10.0.1",
+    "eslint": "~10.8.0",
+    "globals": "~17.7.0",
+    "prettier": "~3.9.6",
+    "stylelint": "~17.14.1",
+    "stylelint-config-standard": "~40.0.0"
+  }
+}

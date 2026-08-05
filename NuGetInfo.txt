@@ -1,0 +1,60 @@
+"github", "LA-WLF" | ForEach-Object {
+    $variableName = "NuGetPackageSourceCredentials_$_"
+
+    [pscustomobject]@{
+        Name    = $variableName
+        Process = [bool][Environment]::GetEnvironmentVariable(
+            $variableName,
+            "Process"
+        )
+        User    = [bool][Environment]::GetEnvironmentVariable(
+            $variableName,
+            "User"
+        )
+        Machine = [bool][Environment]::GetEnvironmentVariable(
+            $variableName,
+            "Machine"
+        )
+    }
+}
+
+
+To remove old values from the current PowerShell session:
+
+Remove-Item Env:NuGetPackageSourceCredentials_github `
+    -ErrorAction SilentlyContinue
+
+Remove-Item Env:NuGetPackageSourceCredentials_LA-WLF `
+    -ErrorAction SilentlyContinue
+
+If the previous table showed a user-level value, remove it permanently:
+
+[Environment]::SetEnvironmentVariable(
+    "NuGetPackageSourceCredentials_github",
+    $null,
+    "User"
+)
+
+[Environment]::SetEnvironmentVariable(
+    "NuGetPackageSourceCredentials_LA-WLF",
+    $null,
+    "User"
+)
+
+
+3. Force NuGet to use the exact configuration file you edited
+
+Run:
+
+$configFile = Join-Path $env:APPDATA "NuGet\NuGet.Config"
+
+dotnet nuget list source `
+    --configfile $configFile `
+    --format Detailed
+
+Then:
+
+dotnet restore `
+    --configfile $configFile `
+    --no-cache `
+    --verbosity normal
