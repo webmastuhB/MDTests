@@ -200,3 +200,21 @@ Invoke-WebRequest `
         Authorization = "Basic $authorization"
         Accept        = "application/json"
     }
+    
+////////////////////////////////////////////////////
+
+Invoke-WebRequest `
+    -UseBasicParsing `
+    -Uri "https://nuget.pkg.github.com/LA-WLF/download/wlf.mp.common.application/index.json" `
+    -Headers @{
+        Authorization = "Basic $authorization"
+        Accept        = "application/json"
+    }
+    
+Invoke-WebRequest `
+    -UseBasicParsing `
+    -Uri "https://nuget.pkg.github.com/LA-WLF/download/wlf.identity.integrationevents/index.json" `
+    -Headers @{
+        Authorization = "Basic $authorization"
+        Accept        = "application/json"
+    }
