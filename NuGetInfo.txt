@@ -174,3 +174,29 @@ Please open LA-WLF -> Packages -> Wlf.Identity.IntegrationEvents -> Package sett
 Under Manage access or Inherited access, verify that my GitHub username (labswal) or the UI Team has Read permission.
 
 If the package inherits permissions, please verify that it is linked to the correct Identity repository and that Inherit access from repository is enabled. This is package access for local NuGet restore, not Manage Actions access.
+
+
+
+//////////////////////////////////////////////////////////
+//
+//  This might be a local problem (me)
+//  
+
+$credential = Get-Credential `
+    -UserName "YOUR_PERSONAL_GITHUB_USERNAME" `
+    -Message "Enter your classic GitHub PAT as the password"
+
+$credentialText = "{0}:{1}" -f `
+    $credential.UserName,
+    $credential.GetNetworkCredential().Password
+
+$authorization = [Convert]::ToBase64String(
+    [Text.Encoding]::ASCII.GetBytes($credentialText)
+)
+
+Invoke-WebRequest `
+    -Uri "https://nuget.pkg.github.com/LA-WLF/index.json" `
+    -Headers @{
+        Authorization = "Basic $authorization"
+        Accept        = "application/json"
+    }
