@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        #BoatList {
+            display: flex;
+        }
+        .boat-box {
+            border: 1px solid #ACACAC;
+            padding: 20px;
+            width: 300px;
+            height: 140px;
+            margin: 20px;
+            border-radius: 4px;
+            -webkit-box-shadow: 3px 3px 10px 5px rgba(0,0,0,0.4); 
+            box-shadow: 3px 3px 10px 5px rgba(0,0,0,0.4);
+        }
+        .boat-license {
+            font-size: 16pt;
+            margin-bottom: 8px;
+        }
+        .boat-nav-button, .boat-page-button {
+            font-size: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            margin: 4px;
+        }
+        .boat-page-button.active {
+            font-weight: bold;
+            border: 2px solid black;
+            background-color: #feffd6;
+        }
+        .boat-nav-button:disabled {
+            background-color: #fff;
+            color: #a6a6a6;
+            border: 1px solid #f0f0f0;
+            opacity: 1;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="BoatList"></div>
+
+    <button type="button" id="PreviousBoats" class="boat-nav-button">&larr;</button>
+    <span id="BoatPageButtons"></span>
+    <button type="button" id="NextBoats" class="boat-nav-button">&rarr;</button>
+
+    <template id="BoatTemplate">
+        <div class="boat-box">
+            <div>
+                <div class="boat-license"></div>
+            </div>
+
+            <div>
+                BoatId: <span class="boat-id"></span>
+            </div>
+
+            <div>
+                Make/Mfr.: <span class="boat-make"></span> / <span class="boat-manufacturer"></span>
+            </div>
+
+            <div>
+                Model Year: <span class="boat-year"></span>
+            </div>
+
+            <div>
+                Exp. Date: <span class="boat-exp-date"></span>
+            </div>
+
+            <div>
+                <span class="boat-expires-soon"></span>
+            </div>
+        </div>
+    </template>
+
+
+    <script src="js/generateBoatsLibrary.js"></script>
+
+    <script>
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//  this is the Boat class for this page
+
+class Boat {
+    constructor({
+        boatId,
+        licenseNumber,
+        make,
+        manufacturer,
+        modelYear,
+        expDate
+    }) {
+        this.boatId = boatId;
+        this.licenseNumber = licenseNumber;
+        this.make = make;
+        this.manufacturer = manufacturer;
+        this.modelYear = modelYear;
+        this.expDate = expDate;
+    }
+}
+
+// end Boat class
+/////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////
+//
+//  this generates an array of fake boats
+
+const howMany = 42;
+const boatIds = generateUniqueIDs(howMany);
+const licenseNumbers = generateLicenseNumbers(howMany);
+const boatManufacturers = generateBoatManufacturers(howMany);
+const boatMakes = generateBoatMakes(howMany);
+const modelYears = generateModelYears(howMany);
+const expDates = generateExpDates(howMany);
+
+
+const fakeBoats = generateBoats(
+    boatIds,
+    licenseNumbers,
+    boatManufacturers,
+    boatMakes,
+    modelYears,
+    expDates
+);
+
+function generateBoats(boatIds, licenseNumbers, boatManufacturers, boatMakes, modelYears, expDates) {
+    const boats = [];
+
+    for (let i = 0; i < boatIds.length; i++) {
+        const boat = new Boat({
+            boatId: boatIds[i],
+            licenseNumber: licenseNumbers[i],
+            make: boatMakes[i],
+            manufacturer: boatManufacturers[i],
+            modelYear: modelYears[i],
+            expDate: expDates[i]
+        });
+
+        boats.push(boat);
+    }
+
+    return boats;
+}
+//console.log(fakeBoats);
+
+// expDates.forEach(date => {
+//     console.log(date.toLocaleDateString("en-US"));
+// });
+
+//
+/////////////////////////////////////////////////////////////
+
+function renderBoat(boat) {
+
+    const template = document.getElementById("BoatTemplate");
+    //console.log(template);
+
+    const clone = template.content.cloneNode(true);
+
+    clone.querySelector(".boat-id").textContent = boat.boatId;
+    clone.querySelector(".boat-make").textContent = boat.make;
+    clone.querySelector(".boat-license").textContent = boat.licenseNumber;
+    clone.querySelector(".boat-manufacturer").textContent = boat.manufacturer;
+    clone.querySelector(".boat-year").textContent = boat.modelYear;
+    clone.querySelector(".boat-exp-date").textContent = formatDate(boat.expDate);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const expDate = new Date(boat.expDate);
+    expDate.setHours(0, 0, 0, 0);
+
+    const sixtyDaysFromNow = new Date(today);
+    sixtyDaysFromNow.setDate(sixtyDaysFromNow.getDate() + 60);
+
+    const expDateElement = clone.querySelector(".boat-expires-soon");
+
+    if (expDate < today) {
+        expDateElement.textContent = "Expired";
+    }
+    else if (expDate <= sixtyDaysFromNow) {
+        expDateElement.textContent = "Almost Expired";
+    }
+
+    return clone;
+}
+
+
+const boatsPerPage = 3;
+let currentBoatIndex = 0;
+
+const boatList = document.getElementById("BoatList");
+const previousButton = document.getElementById("PreviousBoats");
+const nextButton = document.getElementById("NextBoats");
+const pageButtons = document.getElementById("BoatPageButtons");
+
+function displayBoats() {
+
+    // Remove the currently displayed boats
+    boatList.innerHTML = "";
+
+    // Get the next three boats
+    const boatsToDisplay = fakeBoats.slice(
+        currentBoatIndex,
+        currentBoatIndex + boatsPerPage
+    );
+
+    // Render them
+    boatsToDisplay.forEach(boat => {
+        boatList.appendChild(renderBoat(boat));
+    });
+
+    // Disable left arrow if we're at the beginning
+    previousButton.disabled = currentBoatIndex === 0;
+
+    // Disable right arrow if we're at the end
+    nextButton.disabled = currentBoatIndex + boatsPerPage >= fakeBoats.length;
+
+    displayPageButtons();
+}
+
+function displayPageButtons() {
+
+    pageButtons.innerHTML = "";
+
+    const pageCount = Math.ceil(
+        fakeBoats.length / boatsPerPage
+    );
+
+    const currentPage =
+        Math.floor(currentBoatIndex / boatsPerPage) + 1;
+
+    for (let page = 1; page <= pageCount; page++) {
+
+        const button = document.createElement("button");
+
+        button.textContent = page;
+        button.classList.add("boat-page-button");
+
+        if (page === currentPage) {
+            button.classList.add("active");
+        }
+
+        button.addEventListener("click", function () {
+            currentBoatIndex = (page - 1) * boatsPerPage;
+            displayBoats();
+        });
+
+        pageButtons.appendChild(button);
+    }
+}
+
+displayBoats();
+
+nextButton.addEventListener("click", function () {
+
+    if (currentBoatIndex + boatsPerPage < fakeBoats.length) {
+        currentBoatIndex += boatsPerPage;
+        displayBoats();
+    }
+
+});
+
+previousButton.addEventListener("click", function () {
+
+    if (currentBoatIndex > 0) {
+        currentBoatIndex -= boatsPerPage;
+        displayBoats();
+    }
+
+});
+
+
+
+function formatDate(date) {
+    return date.toLocaleDateString("en-US");
+}    
+    </script>
+
+
+</body>
+</html>
