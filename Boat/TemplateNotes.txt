@@ -1,0 +1,52 @@
+I can think of three approaches to doing a template:
+
+1.  Write a js function that returns the html
+
+function renderBoat(boat) {
+    return `
+        <div class="boat-card">
+            <h3>${boat.make}</h3>
+            <p>Boat ID: ${boat.boatId}</p>
+            <p>License: ${boat.licenseNumber}</p>
+            <p>Manufacturer: ${boat.manufacturer}</p>
+            <p>Model Year: ${boat.modelYear}</p>
+        </div>
+    `;
+}
+
+2.  Use the <template> element.  Get a clone of it, use clone.querySelector(".boat-make").textContent = boat.make; to populate it, return the populated html.
+
+<template id="BoatTemplate">
+    <div class="boat">
+        <h3 class="boat-make"></h3>
+        <div>
+            License: <span class="boat-license"></span>
+        </div>
+        <div>
+            Manufacturer: <span class="boat-manufacturer"></span>
+        </div>
+        <div>
+            Model Year: <span class="boat-year"></span>
+        </div>
+    </div>
+</template>
+
+3.  Use a <div> that isn't displayed as the template, use temp.replaceAll("{{boatMake}}", boat.make), replace all the {{tokens}}, return the populated html.
+
+<div id="BoatTemplate" style="display: none;">
+    <div class="boat">
+        <h3>{{boatMake}}</h3>
+        <div>
+            License: <span>{{licenseNumber}}</span>
+        </div>
+        <div>
+            Manufacturer: <span>{{manufacturer}}</span>
+        </div>
+        <div>
+            Model Year: <span>{{modelYear}}</span>
+        </div>
+    </div>
+</div>
+
+
+Which approach is best?  Which is the most common?
