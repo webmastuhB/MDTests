@@ -1,0 +1,11 @@
+Agreed action items:
+	Complete and merge the nearly finished My Boats/customer portal landing-page work.
+	Add Brian's mock-data/pagination work.
+	A new story will be created combining the outstanding My Boats/Figma updates.
+	A new story will be created to remove/change the “No Boats Found” behavior.
+	A new story will be created for the customer/WLF-to-boat API integration.
+	Eric will meet with the developers and determine the individual backend/technical stories.
+	Garrett will determine whether eligibility data identifies specific reasons for ineligibility, including NSF/outstanding-balance situations.
+	Pause story 5807 until the eligibility requirements are clearer.
+	Notify Kevin that the existing 5807 test case may change.
+	Continue the logging and API foundation work Will is working on.
