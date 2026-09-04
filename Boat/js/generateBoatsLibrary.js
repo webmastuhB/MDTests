@@ -305,6 +305,348 @@ const arrayOfBoatMakes = [
     'Fisherman 352'
 ];
 
+const arrayOfParishes = [
+	'Acadia',
+	'Allen',
+	'Ascension',
+	'Assumption',
+	'Avoyelles',
+	'Beauregard',
+	'Bienville',
+	'Bossier',
+	'Caddo',
+	'Calcasieu',
+	'Caldwell',
+	'Cameron',
+	'Catahoula',
+	'Claiborne',
+	'Concordia',
+	'De Soto',
+	'East Baton Rouge',
+	'East Carroll',
+	'East Feliciana',
+	'Evangeline',
+	'Franklin',
+	'Grant',
+	'Iberia',
+	'Iberville',
+	'Jackson',
+	'Jefferson',
+	'Jefferson Davis',
+	'Lafayette',
+	'Lafourche',
+	'LaSalle',
+	'Lincoln',
+	'Livingston',
+	'Madison',
+	'Morehouse',
+	'Natchitoches',
+	'Orleans',
+	'Ouachita',
+	'Plaquemines',
+	'Pointe Coupee',
+	'Rapides',
+	'Red River',
+	'Richland',
+	'Sabine',
+	'St. Bernard',
+	'St. Charles',
+	'St. Helena',
+	'St. James',
+	'St. John the Baptist',
+	'St. Landry',
+	'St. Martin',
+	'St. Mary',
+	'St. Tammany',
+	'Tangipahoa',
+	'Tensas',
+	'Terrebonne',
+	'Union',
+	'Vermilion',
+	'Vernon',
+	'Washington',
+	'Webster',
+	'West Baton Rouge',
+	'West Carroll',
+	'West Feliciana',
+	'Winn'
+];
+
+const firstNames = [
+	'James',
+	'John',
+	'Robert',
+	'Michael',
+	'William',
+	'David',
+	'Richard',
+	'Joseph',
+	'Thomas',
+	'Charles',
+	'Christopher',
+	'Daniel',
+	'Matthew',
+	'Anthony',
+	'Mark',
+	'Donald',
+	'Steven',
+	'Paul',
+	'Andrew',
+	'Joshua',
+	'Kenneth',
+	'Kevin',
+	'Brian',
+	'George',
+	'Timothy',
+	'Ronald',
+	'Edward',
+	'Jason',
+	'Jeffrey',
+	'Ryan',
+	'Jacob',
+	'Gary',
+	'Nicholas',
+	'Eric',
+	'Jonathan',
+	'Stephen',
+	'Larry',
+	'Justin',
+	'Scott',
+	'Brandon',
+	'Benjamin',
+	'Samuel',
+	'Gregory',
+	'Alexander',
+	'Patrick',
+	'Frank',
+	'Raymond',
+	'Jack',
+	'Dennis',
+	'Jerry',
+	'Mary',
+	'Patricia',
+	'Jennifer',
+	'Linda',
+	'Elizabeth',
+	'Barbara',
+	'Susan',
+	'Jessica',
+	'Sarah',
+	'Karen',
+	'Nancy',
+	'Lisa',
+	'Betty',
+	'Margaret',
+	'Sandra',
+	'Ashley',
+	'Kimberly',
+	'Emily',
+	'Donna',
+	'Michelle',
+	'Carol',
+	'Amanda',
+	'Melissa',
+	'Deborah',
+	'Stephanie',
+	'Dorothy',
+	'Rebecca',
+	'Sharon',
+	'Laura',
+	'Cynthia',
+	'Kathleen',
+	'Amy',
+	'Angela',
+	'Shirley',
+	'Anna',
+	'Brenda',
+	'Pamela',
+	'Emma',
+	'Nicole',
+	'Helen',
+	'Samantha',
+	'Katherine',
+	'Christine',
+	'Debra',
+	'Rachel',
+	'Carolyn',
+	'Janet',
+	'Maria',
+	'Heather',
+	'Diane'
+];
+
+const lastNames = [
+	'Smith',
+	'Johnson',
+	'Williams',
+	'Brown',
+	'Jones',
+	'Garcia',
+	'Miller',
+	'Davis',
+	'Rodriguez',
+	'Martinez',
+	'Hernandez',
+	'Lopez',
+	'Gonzalez',
+	'Wilson',
+	'Anderson',
+	'Thomas',
+	'Taylor',
+	'Moore',
+	'Jackson',
+	'Martin',
+	'Lee',
+	'Perez',
+	'Thompson',
+	'White',
+	'Harris',
+	'Sanchez',
+	'Clark',
+	'Ramirez',
+	'Lewis',
+	'Robinson',
+	'Walker',
+	'Young',
+	'Allen',
+	'King',
+	'Wright',
+	'Scott',
+	'Torres',
+	'Nguyen',
+	'Hill',
+	'Flores',
+	'Green',
+	'Adams',
+	'Nelson',
+	'Baker',
+	'Hall',
+	'Rivera',
+	'Campbell',
+	'Mitchell',
+	'Carter',
+	'Roberts',
+	'Gomez',
+	'Phillips',
+	'Evans',
+	'Turner',
+	'Diaz',
+	'Parker',
+	'Cruz',
+	'Edwards',
+	'Collins',
+	'Reyes',
+	'Stewart',
+	'Morris',
+	'Morales',
+	'Murphy',
+	'Cook',
+	'Rogers',
+	'Gutierrez',
+	'Ortiz',
+	'Morgan',
+	'Cooper',
+	'Peterson',
+	'Bailey',
+	'Reed',
+	'Kelly',
+	'Howard',
+	'Ramos',
+	'Kim',
+	'Cox',
+	'Ward',
+	'Richardson',
+	'Watson',
+	'Brooks',
+	'Chavez',
+	'Wood',
+	'James',
+	'Bennett',
+	'Gray',
+	'Mendoza',
+	'Ruiz',
+	'Hughes',
+	'Price',
+	'Alvarez',
+	'Castillo',
+	'Sanders',
+	'Patel',
+	'Myers',
+	'Long',
+	'Ross',
+	'Foster',
+	'Jimenez'
+];
+
+const motorHPs = [
+    25, 40, 50, 60, 75, 90, 115, 150, 175, 200, 225, 250
+];
+
+const motorManufacturers = [
+  'Mercury',
+  'Yamaha',
+  'Honda Marine',
+  'Suzuki Marine',
+  'Evinrude',
+  'Johnson',
+  'Tohatsu',
+  'Nissan Marine',
+  'Mariner',
+  'Force',
+  'Volvo Penta',
+  'MerCruiser',
+  'OMC',
+  'Ski-Doo Marine',
+  'Sea-Doo',
+  'Rotax',
+  'Indmar',
+  'PCM',
+  'Ilmor Marine',
+  'Crusader',
+  'Yanmar',
+  'Cummins',
+  'Caterpillar',
+  'Perkins',
+  'Mitsubishi',
+  'MAN',
+  'Scania',
+  'Detroit Diesel',
+  'Westerbeke',
+  'Beta Marine'
+];
+
+const motorMakes = [
+  'FourStroke',
+  'Pro XS',
+  'Verado',
+  'SeaPro',
+  'OptiMax',
+  'F25',
+  'F40',
+  'F50',
+  'F70',
+  'F90',
+  'F115',
+  'F150',
+  'F200',
+  'F250',
+  'V MAX SHO',
+  'BF40',
+  'BF50',
+  'BF75',
+  'BF90',
+  'BF115',
+  'BF150',
+  'DF40A',
+  'DF60A',
+  'DF90A',
+  'DF115A',
+  'DF140A',
+  'DF150A',
+  'DF200A',
+  'TLDI',
+  'MFS'
+];
 
 function generateUniqueIDs(count = 20) {
     const numbers = new Set();
@@ -441,3 +783,236 @@ function generateExpDates(count = 20) {
     return dates;
 }
 
+function generateBoatLengths(count = 20) {
+    const minInches = 14 * 12;
+    const maxInches = 28 * 12;
+
+    const lengths = [];
+
+    for (let i = 0; i < count; i++) {
+
+        // Averaging several random values creates a bell-ish curve,
+        // clustering most results near the middle of the range.
+        const random =
+            (Math.random() +
+             Math.random() +
+             Math.random() +
+             Math.random()) / 4;
+
+        const inches = Math.round(
+            minInches + random * (maxInches - minInches)
+        );
+
+        lengths.push(inches);
+    }
+
+    return lengths;
+}
+
+function generateHINs(count = 20) {
+    const hins = [];
+
+    // I, O, and Q are excluded from the serial-number portion of a HIN.
+    const letters = "ABCDEFGHJKLMNPRSTUVWXYZ";
+    const alphaNumeric = "ABCDEFGHJKLMNPRSTUVWXYZ0123456789";
+    const monthCodes = "ABCDEFGHIJKL"; // Jan-Dec
+
+    function randomChar(chars) {
+        return chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    while (hins.length < count) {
+
+        // Manufacturer Identification Code (MIC)
+        const mic =
+            randomChar(letters) +
+            randomChar(letters) +
+            randomChar(letters);
+
+        // Manufacturer serial number - 5 characters
+        let serial = "";
+
+        for (let i = 0; i < 5; i++) {
+            serial += randomChar(alphaNumeric);
+        }
+
+        // Random model year from 2000 through 2026
+        const year = Math.floor(Math.random() * 27) + 2000;
+
+        // Random month
+        const monthCode =
+            monthCodes[Math.floor(Math.random() * monthCodes.length)];
+
+        // Last digit of manufacture/certification year
+        const yearDigit = year % 10;
+
+        // Two-digit model year
+        const modelYear = String(year % 100).padStart(2, "0");
+
+        const hin =
+            mic +
+            serial +
+            monthCode +
+            yearDigit +
+            modelYear;
+
+        // Make sure we don't accidentally create duplicates
+        if (!hins.includes(hin)) {
+            hins.push(hin);
+        }
+    }
+
+    return hins;
+}
+
+function generateMotorSerialNumbers(count = 20) {
+    const codes = [];
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    function randomDigit() {
+        return Math.floor(Math.random() * 9) + 1;
+    }
+
+    function randomLetter() {
+        return letters[Math.floor(Math.random() * letters.length)];
+    }
+
+    while (codes.length < count) {
+        let code = '';
+
+        // First digit
+        code += randomDigit();
+
+        // Three capital letters
+        for (let i = 0; i < 3; i++) {
+            code += randomLetter();
+        }
+
+        // Seven digits
+        for (let i = 0; i < 7; i++) {
+            code += randomDigit();
+        }
+
+        // Prevent duplicates
+        if (!codes.includes(code)) {
+            codes.push(code);
+        }
+    }
+
+    return codes;
+}
+
+function generateRandomNumbers(count = 20, len = 6) {
+    const numbers = new Set();
+
+    if (!Number.isInteger(count) || count <= 0) {
+        return [];
+    }
+
+    if (!Number.isInteger(len) || len <= 0) {
+        return [];
+    }
+
+    const min = Math.pow(10, len - 1);
+    const max = Math.pow(10, len) - 1;
+
+    while (numbers.size < count) {
+        const number =
+            Math.floor(Math.random() * (max - min + 1)) + min;
+
+        numbers.add(number);
+    }
+
+    return Array.from(numbers);
+}
+
+function generateRandomDates(count = 20) {
+    const dates = [];
+    const now = new Date();
+
+    const twoYearsAgo = new Date(now);
+    twoYearsAgo.setFullYear(now.getFullYear() - 2);
+
+    const threeYearsFromNow = new Date(now);
+    threeYearsFromNow.setFullYear(now.getFullYear() + 3);
+
+    const pastCount = Math.floor(count / 2);
+    const futureCount = count - pastCount;
+
+    function randomDateBetween(start, end) {
+        const time =
+            start.getTime() +
+            Math.random() * (end.getTime() - start.getTime());
+
+        return new Date(time);
+    }
+
+    // 50% sometime within the last 2 years
+    for (let i = 0; i < pastCount; i++) {
+        dates.push(randomDateBetween(twoYearsAgo, now));
+    }
+
+    // 50% sometime within the next 3 years
+    for (let i = 0; i < futureCount; i++) {
+        dates.push(randomDateBetween(now, threeYearsFromNow));
+    }
+
+    // Shuffle the array
+    for (let i = dates.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [dates[i], dates[j]] = [dates[j], dates[i]];
+    }
+
+    return dates;
+}
+
+function generateOwnersNames(count = 20) {
+    const names = [];
+
+    const doubleNameCount = Math.round(count * 0.10);
+    const singleNameCount = count - doubleNameCount;
+
+    function getRandomFullName() {
+        const firstName =
+            firstNames[Math.floor(Math.random() * firstNames.length)];
+
+        const lastName =
+            lastNames[Math.floor(Math.random() * lastNames.length)];
+
+        return `${firstName} ${lastName}`;
+    }
+
+    // 90% contain one full name
+    for (let i = 0; i < singleNameCount; i++) {
+        names.push(getRandomFullName());
+    }
+
+    // 10% contain two full names separated by a comma
+    for (let i = 0; i < doubleNameCount; i++) {
+        names.push(`${getRandomFullName()}, ${getRandomFullName()}`);
+    }
+
+    // Shuffle the array
+    for (let i = names.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [names[i], names[j]] = [names[j], names[i]];
+    }
+
+    return names;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+
+function inchesToFeetAndInches(totalInches) {
+    if (!Number.isInteger(totalInches) || totalInches <= 0) {
+        return;
+    }
+
+    const feet = Math.floor(totalInches / 12);
+    const inches = totalInches % 12;
+
+    return `${feet}' ${inches}"`;
+}
