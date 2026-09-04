@@ -231,7 +231,7 @@ function displayBoats() {
     displayPageButtons();
 }
 
-function displayPageButtons() {
+/*function displayPageButtons() {
 
     pageButtons.innerHTML = "";
 
@@ -260,6 +260,116 @@ function displayPageButtons() {
 
         pageButtons.appendChild(button);
     }
+}*/
+
+function displayPageButtons() {
+
+    pageButtons.innerHTML = '';
+
+    const pageCount = Math.ceil(
+        boats.length / boatsPerPage
+    );
+
+    const currentPage =
+        Math.floor(currentBoatIndex / boatsPerPage) + 1;
+
+    const template = document.getElementById(
+        'MyBoatCardTemplate_MyBoatsCtrls_Button'
+    );
+
+    let pages = [];
+
+    // 7 or fewer pages -- display all of them
+    if (pageCount <= 7) {
+
+        for (let page = 1; page <= pageCount; page++) {
+            pages.push(page);
+        }
+
+    }
+    // Near the beginning
+    else if (currentPage <= 4) {
+
+        pages = [
+            1,
+            2,
+            3,
+            4,
+            5,
+            '...',
+            pageCount
+        ];
+
+    }
+    // Near the end
+    else if (currentPage >= pageCount - 3) {
+
+        pages = [
+            1,
+            '...',
+            pageCount - 4,
+            pageCount - 3,
+            pageCount - 2,
+            pageCount - 1,
+            pageCount
+        ];
+
+    }
+    // Somewhere in the middle
+    else {
+
+        pages = [
+            1,
+            '...',
+            currentPage - 1,
+            currentPage,
+            currentPage + 1,
+            '...',
+            pageCount
+        ];
+    }
+
+
+    pages.forEach(page => {
+
+        const clone = template.content.cloneNode(true);
+
+        const pageItem = clone.querySelector('.page-item');
+        const pageLink = clone.querySelector('.page-link');
+
+
+        // Ellipsis
+        if (page === '...') {
+
+            pageLink.textContent = '...';
+
+            // Make it non-clickable
+            pageLink.removeAttribute('href');
+            pageItem.classList.add('disabled');
+
+        }
+        // Normal page number
+        else {
+
+            pageLink.textContent = page;
+
+            if (page === currentPage) {
+                pageItem.classList.add('active');
+            }
+
+            pageLink.addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                currentBoatIndex =
+                    (page - 1) * boatsPerPage;
+
+                displayBoats();
+            });
+        }
+
+        pageButtons.appendChild(clone);
+    });
 }
 
 displayBoats();
