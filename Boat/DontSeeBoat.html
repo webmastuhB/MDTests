@@ -1,0 +1,115 @@
+<details class="boat-renew-details">
+
+    <summary class="boat-renew-summary">
+        <img class="boat-renew-icon"
+             src="~/images/boat-icon.png"
+             alt="" />
+
+        <span class="boat-renew-title">
+            Don't see your boat listed?
+        </span>
+    </summary>
+
+    <div class="boat-renew-content">
+        <p>
+            The LDWF Customer Portal allows you to find and pay for
+            renewals on Boat registrations, even if the boat is not
+            associated with your account.
+        </p>
+
+        <p class="fw-bold">
+            Select Renew Boat Registration to search and renew a boat.
+        </p>
+
+        <button type="button" class="btn btn-light w-100">
+            <i class="fa-solid fa-rotate"></i>
+            Renew Boat Registration
+        </button>
+    </div>
+
+</details>
+
+
+<style>
+.boat-renew-details {
+    border: 2px dashed #718447;
+    border-radius: 4px;
+    padding: 0;
+}
+
+
+/* Get rid of browser's native triangle */
+.boat-renew-summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.boat-renew-summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* -------------------------------------------------- */
+/* CLOSED                                             */
+/* -------------------------------------------------- */
+
+.boat-renew-summary {
+    min-height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+/* Our own little triangle */
+.boat-renew-summary::before {
+    content: "▶";
+    font-size: 0.65rem;
+    margin-right: 8px;
+}
+
+.boat-renew-icon {
+    display: none;
+}
+
+
+/* -------------------------------------------------- */
+/* OPEN                                               */
+/* -------------------------------------------------- */
+
+.boat-renew-details[open] {
+    padding: 14px;
+}
+
+.boat-renew-details[open] .boat-renew-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    min-height: 0;
+}
+
+.boat-renew-details[open] .boat-renew-summary::before {
+    display: none;
+}
+
+.boat-renew-details[open] .boat-renew-icon {
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 12px;
+}
+
+.boat-renew-details[open] .boat-renew-title {
+    width: 100%;
+    text-align: left;
+    font-size: 1.4rem;
+}
+
+.boat-renew-content {
+    margin-top: 8px;
+}
+</style>
